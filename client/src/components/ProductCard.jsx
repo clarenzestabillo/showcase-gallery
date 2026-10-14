@@ -1,6 +1,12 @@
-function ProductCard({ product, showActions, onEdit, onDelete }) {
+function ProductCard({ product, showActions, onEdit, onDelete, onSelect }) {
   return (
-    <article className="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <article
+      onClick={onSelect ? () => onSelect(product) : undefined}
+      className={
+        "group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 transition duration-300 hover:-translate-y-1 hover:shadow-xl " +
+        (onSelect ? "cursor-pointer" : "")
+      }
+    >
       {/* image with the price tag on top */}
       <div className="relative aspect-4/3 overflow-hidden">
         <img
@@ -13,9 +19,10 @@ function ProductCard({ product, showActions, onEdit, onDelete }) {
         </span>
       </div>
 
-      {/* name and description */}
+      {/* name, category and description */}
       <div className="p-5">
         <h3 className="text-lg font-semibold text-slate-900">{product.name}</h3>
+        <p className="text-xs font-medium text-indigo-500">{product.category || "General"}</p>
         <p className="mt-1 text-sm text-slate-500">{product.description}</p>
 
         {/* edit and delete buttons only show in the Manage page */}

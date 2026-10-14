@@ -1,6 +1,7 @@
 import ProductCard from "./ProductCard";
 
-function ProductGrid({ products, showActions = false, onEdit, onDelete }) {   
+function ProductGrid({ products, showActions = false, onEdit, onDelete, onSelect }) {
+  // nothing to show yet
   if (products.length === 0) {
     return (
       <div className="rounded-2xl border-2 border-dashed border-slate-300 py-20 text-center text-slate-400">
@@ -18,6 +19,7 @@ function ProductGrid({ products, showActions = false, onEdit, onDelete }) {
           showActions={showActions}
           onEdit={onEdit}
           onDelete={onDelete}
+          onSelect={onSelect}
         />
       ))}
     </div>

@@ -1,14 +1,15 @@
 import { useState } from "react";
 import ImageUpload from "./ImageUpload";
 
-const emptyForm = { name: "", price: "", description: "", image: "" };
+const emptyForm = { name: "", price: "", description: "", category: "", image: "" };
 
 const inputClass =
   "w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100";
 
 function ProductForm({ editingProduct, onSubmit, onCancel }) {
-  // if we are editing, start with that product's values
-  const [form, setForm] = useState(editingProduct || emptyForm);
+  const [form, setForm] = useState(
+    editingProduct ? { ...emptyForm, ...editingProduct } : emptyForm
+  );
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -19,7 +20,6 @@ function ProductForm({ editingProduct, onSubmit, onCancel }) {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // check the required fields first
     if (form.name.trim() === "" || form.price === "" || form.image === "") {
       setError("Name, price, and image are required.");
       return;
@@ -32,10 +32,10 @@ function ProductForm({ editingProduct, onSubmit, onCancel }) {
         name: form.name.trim(),
         price: Number(form.price),
         description: form.description,
+        category: form.category.trim() || "General",
         image: form.image,
       });
 
-      // clear the form after saving
       setForm(emptyForm);
       setError("");
     } catch (err) {
@@ -45,7 +45,6 @@ function ProductForm({ editingProduct, onSubmit, onCancel }) {
     }
   }
 
-  // text for the main button
   let buttonText = "Add Product";
   if (saving) {
     buttonText = "Saving...";
@@ -82,6 +81,13 @@ function ProductForm({ editingProduct, onSubmit, onCancel }) {
         placeholder="Price (₱)"
         className={inputClass}
         value={form.price}
+        onChange={handleChange}
+      />
+      <input
+        name="category"
+        placeholder="Category (e.g. Gadgets, Bags)"
+        className={inputClass}
+        value={form.category}
         onChange={handleChange}
       />
       <textarea
@@ -121,4 +127,4 @@ function ProductForm({ editingProduct, onSubmit, onCancel }) {
   );
 }
 
-export default ProductForm;
+export default ProductForm;                                                     

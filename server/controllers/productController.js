@@ -28,9 +28,9 @@ export const getProduct = async (req, res) => {
 // POST /api/products - add a new product
 export const createProduct = async (req, res) => {
   try {
-    const { name, price, description, image } = req.body;
+    const { name, price, description, category, image } = req.body;
 
-    const product = await Product.create({ name, price, description, image });
+    const product = await Product.create({ name, price, description, category, image });
 
     res.status(201).json(product);
   } catch (error) {
@@ -41,11 +41,11 @@ export const createProduct = async (req, res) => {
 // PUT /api/products/:id - edit a product
 export const updateProduct = async (req, res) => {
   try {
-    const { name, price, description, image } = req.body;
+    const { name, price, description, category, image } = req.body;
 
     const product = await Product.findByIdAndUpdate(
       req.params.id,
-      { name, price, description, image },
+      { name, price, description, category, image },
       { new: true, runValidators: true }
     );
 

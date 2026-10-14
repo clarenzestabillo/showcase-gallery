@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// how a product looks inside the database
 const productSchema = new mongoose.Schema(
   {
     name: {
@@ -18,7 +17,11 @@ const productSchema = new mongoose.Schema(
       default: "",
       trim: true,
     },
-    // the image is saved as a base64 string
+    category: {
+      type: String,
+      default: "General",
+      trim: true,
+    },
     image: {
       type: String,
       required: [true, "Image is required"],
