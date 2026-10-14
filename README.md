@@ -6,7 +6,7 @@ Data and images are stored in MongoDB Atlas.
 **Student:** Clarenz Estabillo - INF238
 
 ## Live Links
-- Website (Vercel): https://showcase-yourname.vercel.app
+- Website (Vercel): https://showcase-gallery-olive.vercel.app/
 - API (Render): https://showcase-gallery-obtp.onrender.com
 
 ## Tech Stack
